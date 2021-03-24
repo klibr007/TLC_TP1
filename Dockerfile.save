@@ -1,0 +1,13 @@
+ubuntu# Dockerfile
+
+FROM java:8-jdk-alpine
+
+RUN apt-get install -y maven 
+RUN apt-get install -f libpng16-16 
+RUN apt-get install -f libjasper1 
+RUN apt-get install -f libdc1394-22 
+RUN git clone https://github.com/barais/TPDockerSampleApp 
+RUN cd TPDockerSampleApp && \
+     mvn install:install-file -Dfile=./lib/opencv-3410.jar \
+     -DgroupId=org.opencv  -DartifactId=opencv -Dversion=3.4.10 -Dpackaging=jar \
+mvn package
